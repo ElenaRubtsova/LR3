@@ -16,5 +16,10 @@
         <li>Your controller at <code><a href="{{ 'W:/domains/weblr3/src/Controller/HomepageController.php'|file_link(0) }}">src/Controller/HomepageController.php</a></code></li>
         <li>Your template at <code><a href="{{ 'W:/domains/weblr3/templates/homepage/index.html.twig'|file_link(0) }}">templates/homepage/index.html.twig</a></code></li>
     </ul>
+    {% if app.user %}
+        <div class="mb-3">
+            You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+        </div>
+    {% endif %}
 </div>
 {% endblock %}
