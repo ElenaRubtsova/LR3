@@ -23,7 +23,7 @@ class Feedback
     private $raiting;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text") }
      */
     private $text;
 
@@ -32,6 +32,11 @@ class Feedback
      * @ORM\JoinColumn(nullable=false)
      */
     private $product;
+
+    public function __toString()
+    {
+        return $this->raiting;
+    }
 
     public function getId(): ?int
     {
@@ -45,6 +50,8 @@ class Feedback
 
     public function setRaiting(int $raiting): self
     {
+        if($raiting < 0)
+            return null;
         $this->raiting = $raiting;
 
         return $this;
