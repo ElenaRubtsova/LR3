@@ -12,6 +12,14 @@ class ProductCrudController extends AbstractCrudController
         return Product::class;
     }
 
+    public function createEntity(string $entityFqcn)
+    {
+        $product = new Product();
+        $product->setDate(new \DateTime());
+
+        return $product;
+    }
+
     public function configureFields(string $pageName): iterable
     {
         return [
