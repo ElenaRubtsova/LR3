@@ -26,7 +26,7 @@ class FeedbackController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="feedback_new", methods={"GET","POST"})
+     * @Route("/new", name="feedback_new", methods={"GET", "POST"})
      */
     public function new(Request $request): Response
     {
@@ -46,49 +46,5 @@ class FeedbackController extends AbstractController
             'feedback' => $feedback,
             'form' => $form->createView(),
         ]);
-    }
-
-    /**
-     * @Route("/{id}", name="feedback_show", methods={"GET"})
-     */
-    public function show(Feedback $feedback): Response
-    {
-        return $this->render('feedback/show.html.twig', [
-            'feedback' => $feedback,
-        ]);
-    }
-
-    /**
-     * @Route("/{id}/edit", name="feedback_edit", methods={"GET","POST"})
-     */
-    public function edit(Request $request, Feedback $feedback): Response
-    {
-        $form = $this->createForm(FeedbackType::class, $feedback);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('feedback_index');
-        }
-
-        return $this->render('feedback/edit.html.twig', [
-            'feedback' => $feedback,
-            'form' => $form->createView(),
-        ]);
-    }
-
-    /**
-     * @Route("/{id}", name="feedback_delete", methods={"POST"})
-     */
-    public function delete(Request $request, Feedback $feedback): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$feedback->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($feedback);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('feedback_index');
     }
 }

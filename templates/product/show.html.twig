@@ -1,16 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Product{% endblock %}
+{% block title %}{{ product.name }}{% endblock %}
 
 {% block body %}
 <div class="wrapper">
-    <h1>Товар</h1>
+    <h1>{{ product.name }}</h1>
     <table class="table">
         <tbody>
-            <tr>
-                <th>Название</th>
-                <td>{{ product.name }}</td>
-            </tr>
             <tr>
                 <th>Дата добавления</th>
                 <td>{{ product.date ? product.date|date('Y-m-d H:i:s') : '' }}</td>
@@ -23,5 +19,32 @@
     </table>
 
     <a href="{{ path('product_index') }}">Вернуться к списку</a>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Оценка</th>
+                <th>Текст отзыва</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for feedback in product.feedback %}
+            <tr>
+                <td>{{ feedback.raiting }}</td>
+                <td>{{ feedback.text }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="2">Ничего не найдено</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {% if app.user %}
+        <h2>Оставить отзыв</h2>
+        {{ form(feedback_form) }}
+    {% endif %}
+
 </div>
 {% endblock %}

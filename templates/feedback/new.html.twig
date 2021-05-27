@@ -1,11 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Feedback{% endblock %}
+{% block title %}Новый отзыв{% endblock %}
 
 {% block body %}
-    <h1>Create new Feedback</h1>
 
-    {{ include('feedback/_form.html.twig') }}
+    <h1>Оставить отзыв</h1>
 
-    <a href="{{ path('feedback_index') }}">back to list</a>
+    {% for flashError in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+    {% endfor %}
+
+	<div class="wrapper">
+    	{{ include('feedback/_form.html.twig') }}
+	</div>
+
 {% endblock %}

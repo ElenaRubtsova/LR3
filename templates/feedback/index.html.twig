@@ -11,19 +11,14 @@
                 <th>Id</th>
                 <th>Raiting</th>
                 <th>Text</th>
-                <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for feedback in feedback %}
             <tr>
-                <td>{{ feedback.id }}</td>
+                <td>{{ feedback.product }}</td>
                 <td>{{ feedback.raiting }}</td>
                 <td>{{ feedback.text }}</td>
-                <td>
-                    <a href="{{ path('feedback_show', {'id': feedback.id}) }}">show</a>
-                    <a href="{{ path('feedback_edit', {'id': feedback.id}) }}">edit</a>
-                </td>
             </tr>
         {% else %}
             <tr>
